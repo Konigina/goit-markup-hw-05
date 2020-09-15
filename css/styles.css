@@ -18,6 +18,9 @@ main-grey: #757575;
 	--horizontal-line: #e5e5e5;
 	--social-link-footer: rgba(255, 255, 255, 0.1);
 	--our-clients-section: #AFB1B8;
+	--image-overflow: rgba(33, 150, 243, 0.9);
+	--we-do-overflow: rgba(47, 48, 58, 0.8);
+	--modal-window-backdrop: rgba(0, 0, 0, 0.2);
 }
 
 * {
@@ -91,7 +94,19 @@ body {
 }
 
 .active {
-	color: var(--accent-color);
+	position: relative;
+}
+
+.active::after {
+	content: '';
+	position: absolute;
+	left: 0;
+	bottom: 0px;
+	width: 100%;
+
+	background-color: var(--accent-color);
+	height: 4px;
+	border-radius: 2px;
 }
 
 .address-header {
@@ -196,6 +211,35 @@ li .address-links {
 	padding-bottom: 94px;
 	margin-bottom: 0;
 	margin-top: 0;
+}
+
+.we-do-overflow {
+	position: relative;
+}
+
+.we-do-subscription {
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	width: 100%;
+	height: 24%;
+	margin-top: 0;
+	margin-bottom: 0;
+	background-color: var(--we-do-overflow);
+	color: var(--white-color);
+	font-weight: 700;
+	line-height: 1.14;
+	text-transform: uppercase;
+	padding-top: 27px;
+	padding-bottom: 27px;
+	}
+
+.we-do-overflow > .we-do-subscription {
+	text-align: center;
+}
+
+.we-do-overflow > img {
+	display: block;
 }
 
 .subtitle {
@@ -475,6 +519,36 @@ ul.card-set {
 	width: 100%;
 }
 
+.card-image-overflow {
+	position: relative;
+	overflow: hidden;
+}
+
+.card-image-overflow > p {
+	position: absolute;
+	bottom: -100%;
+	width: 100%;
+	height: 100%;
+	background-color: var(--image-overflow);
+	color: var(--white-color);
+	padding: 63px 24px;
+
+	font-size: 18px;
+	line-height: 1.56;
+	letter-spacing: 0.03em;
+	margin-top: 0;
+	margin-bottom: 0;
+}
+
+.card-image-overflow:hover > p {
+	top: 0;
+	left: 0;
+}
+
+.card-text {
+	padding: 20px 24px;
+}
+
 .page-header > .logo {
 	margin-right: 93px;
 }
@@ -503,8 +577,6 @@ ul.card-set {
 	height: 252px;
 	margin-left: auto;
 	margin-right: auto;
-	display: flex;
-	align-items: flex-start;
 }
 .footer-address-links > li {
 	margin-bottom: 8px;
@@ -520,13 +592,32 @@ ul.card-set {
 .header-list-item {
 	display: flex;
 	align-items: center;
+	color: var(--subheading-color);
 }
 
+.header-list-item:hover {
+	color: var(--accent-color);
+}
+
+
 .address-container {
-	padding-left: 215px;
-	padding-right: 70px;
+	width: 1200px;
+	padding-left: 15px;
+	padding-right: 15px;
 	padding-top: 60px;
 	padding-bottom: 60px;
+	margin-left: auto;
+	margin-right: auto;
+	display: flex;
+	align-items: baseline;
+	justify-content: start;
+}
+
+.logo-container {
+	padding-left: 0;
+	padding-right: 70px;
+	padding-top: 0;
+	padding-bottom: 0;
 	margin-left: 0;
 	margin-right: 0;
 }
@@ -558,8 +649,6 @@ ul.card-set {
 .contacts-footer {
 	margin-left: 0px;
 	margin-right: auto;
-	margin-top: 72px;
-	margin-bottom: 100px;
 }
 
 .footer-button-list {
@@ -641,7 +730,63 @@ ul.card-set {
 }
 	
 
-.our-clients-link:focus > .our-clients-icon,
-.our-clients-link:hover > .our-clients-icon {
+.our-clients-list-item:focus .our-clients-icon,
+.our-clients-list-item:hover .our-clients-icon {
 	fill: var(--accent-color);
 }
+
+.our-clients-list-item:focus,
+.our-clients-list-item:hover {
+	border-color: var(--accent-color);
+}
+
+.visually-hidden {
+	position: absolute;
+	width: 1px;
+	height: 1px;
+	margin: -1px;
+	border: 0;
+	padding: 0;
+	
+	white-space: nowrap;
+	clip-path: inset(100%);
+	clip: rect(0 0 0 0);
+	overflow: hidden;
+  }
+
+  .backdrop {
+	background-color: var(--modal-window-backdrop);
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+  }
+
+  .backdrop.is-hidden {
+	  opacity: 0;
+	  pointer-events: none;
+	  visibility: hidden;
+  }
+
+  .modal {
+	min-width: 528px;
+	min-height: 581px;
+	background-color: var(--white-color);
+	box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.12), 0px 1px 1px rgba(0, 0, 0, 0.14), 0px 2px 1px rgba(0, 0, 0, 0.2);
+	border-radius: 4px;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+  }
+
+  .modal-button-icon {
+	  position: absolute;
+	  top: 8px;
+	  right: 8px;
+
+	  background-color: var(--white-color);
+	  border: 1px solid rgba(0, 0, 0, 0.1);
+	  border-radius: 50%;
+  }
